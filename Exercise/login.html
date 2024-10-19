@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card p-4 shadow-lg" style="width: 350px;">
+            <h3 class="text-center mb-4">Login</h3>
+            <form id="loginForm">
+                <!-- Username input -->
+                <div class="mb-3">
+                    <label for="username" class="form-label">Tài khoản</label>
+                    <input type="text" class="form-control" id="username" placeholder="Nhập tài khoản">
+                    <div class="invalid-feedback">
+                        Tài khoản phải là định dạng email hợp lệ.
+                    </div>
+                </div>
+                <!-- Password input -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+                    <div class="invalid-feedback">
+                        Mật khẩu không hợp lệ.
+                    </div>
+                </div>
+                <!-- Login button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                </div>
+                <!-- Register link -->
+                <div class="text-center mt-3">
+                    <a href="#">Đăng ký</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript validation -->
+    <script>
+        // Hàm kiểm tra định dạng email
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            // Lấy giá trị từ input
+            const username = document.getElementById('username');
+            const password = document.getElementById('password');
+
+            // Biến kiểm tra hợp lệ
+            let valid = true;
+
+            // Kiểm tra tài khoản
+            if (!validateEmail(username.value)) {
+                username.classList.add('is-invalid');
+                valid = false;
+            } else {
+                username.classList.remove('is-invalid');
+            }
+
+            // Kiểm tra mật khẩu (giả sử yêu cầu đơn giản là mật khẩu dài ít nhất 6 ký tự)
+            if (password.value.length < 6) {
+                password.classList.add('is-invalid');
+                valid = false;
+            } else {
+                password.classList.remove('is-invalid');
+            }
+
+            // Nếu không hợp lệ, ngăn không cho gửi form
+            if (!valid) {
+                event.preventDefault();
+            } else {
+                // Chuyển hướng đến trang home.html nếu hợp lệ
+                window.location.href = '/home.html';
+            }
+        });
+    </script>
+</body>
+</html>
